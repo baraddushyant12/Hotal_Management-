@@ -1,0 +1,124 @@
+<% layout('./layout/boilerplate.ejs') %>
+
+<body>   
+  <style>
+    #filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      margin-right: 2rem;
+      margin-top: 1rem;
+      opacity: 0.7;
+    }
+
+    .filters {
+      display: flex;
+      flex-direction: column; /* Align icon and text vertically */
+      align-items: center;
+      margin-right: 2rem;
+      margin-top: 1rem;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    .filters:hover {
+      opacity: 1;
+    }
+
+    .filters p {
+      font-size: 0.8rem;
+      margin-top: 0.5rem; /* Remove margin-left and use margin-top */
+      margin-bottom: 0; /* Ensure there's no space below the text */
+    }
+
+    .filters i {
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .tax-info {
+      display: none;
+      color: black;
+      margin-left: 10px;
+      font-size: 0.9rem;
+    }
+
+    .tax-toggle {
+      border: 1px solid #070707; 
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 5rem;
+    }
+
+    .tax-toggle label {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .tax-toggle {
+      align-items: center;
+      display: inline;
+      height: 3.5rem;
+    }
+  </style>
+
+  <!-- Filters Section with 10 icons, clickable but no radio buttons -->
+  <div id="filters">
+    <div class="filters" onclick="filterClicked('Trending')">
+      <i class="fa-solid fa-fire"></i><p>Trending</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Rooms')">
+      <i class="fa-solid fa-bed"></i><p>Rooms</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Iconic Cities')">
+      <i class="fa-solid fa-city"></i><p>Iconic Cities</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Nature')">
+      <i class="fa-solid fa-tree"></i><p>Nature</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Homes')">
+      <i class="fa-solid fa-house"></i><p>Homes</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Swimming Pools')">
+      <i class="fa-solid fa-swimmer"></i><p>Swimming Pools</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Luxury')">
+      <i class="fa-solid fa-crown"></i><p>Luxury</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Pets')">
+      <i class="fa-solid fa-paw"></i><p>Pets</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Workspaces')">
+      <i class="fa-solid fa-laptop-house"></i><p>Workspaces</p>
+    </div>
+    <div class="filters" onclick="filterClicked('Adventure')">
+      <i class="fa-solid fa-mountain"></i><p>Adventure</p>
+    </div>
+  </div>
+
+  <!-- Listings Section -->
+  <div class="row row-cols-lg-3 row-cols-md-2 row-col-sm-1 mt-4">
+    <% for (let listing of allListings) { %>
+      <a href="/listings/<%= listing._id %>" class="listing_list">
+        <div class="card col listing-card">
+          <img src="<%= listing.image.url %>" class="card-img-top" style="height: 20rem;" alt="listing_image">
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <b>
+              <p class="card-text">
+                <%= listing.title %><br>
+              </b>
+              ₹<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /Night
+            
+            </p>
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+
+</body>
